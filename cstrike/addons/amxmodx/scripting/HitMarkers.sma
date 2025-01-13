@@ -57,22 +57,22 @@ public plugin_init()
 
 	RegisterHam(Ham_TakeDamage, "player", "PostTakeDamage", 1);
 
-	pPlugin = 				register_cvar("amx_hitmarkers", "1"); // Enables/disables plugin
-	pRainbow = 				register_cvar("amx_hmrainbow", "1"); // Enables/disables random colors on every hit.
-	pRandomHitmarkers = 	register_cvar("amx_hmrandom", "1"); //Enables/disables random hit markers.
+	pPlugin =				register_cvar("amx_hitmarkers", "1"); // Enables/disables plugin
+	pRainbow =				register_cvar("amx_hmrainbow", "1"); // Enables/disables random colors on every hit.
+	pRandomHitmarkers =		register_cvar("amx_hmrandom", "1"); //Enables/disables random hit markers.
 	pSnipersOnly =			register_cvar("amx_hmsnipers", "0"); // Enables/disables hitmarkers on snipers only.
-	pSounds = 				register_cvar("amx_hmsounds", "1"); // Enables/disables hitmarker sound on hit.
-	pSymbol = 				register_cvar("amx_hmsymbol", "x"); // Sets the symbol of the hitmarker (only works when amx_hmrandom "0")
+	pSounds =				register_cvar("amx_hmsounds", "1"); // Enables/disables hitmarker sound on hit.
+	pSymbol =				register_cvar("amx_hmsymbol", "x"); // Sets the symbol of the hitmarker (only works when amx_hmrandom "0")
 	pColorRed =				register_cvar("amx_hmrcolor", "165"); // RGB - Red (This won't work when amx_hmrainbow = 1)
 	pColorGreen =			register_cvar("amx_hmgcolor", "165"); // RGB - Green (This won't work when amx_hmrainbow = 1)
 	pColorBlue =			register_cvar("amx_hmbcolor", "165"); // RGB - Blue (This won't work when amx_hmrainbow = 1)
-	pDeadHitMarker = 		register_cvar("amx_hmdead", "1"); // Sets a different color when victim died.
-	pDeadColorRed = 		register_cvar("amx_hmdeadrcolor", "255"); // RGB Dead - Red
-	pDeadColorGreen = 		register_cvar("amx_hmdeadgcolor", "0"); // RGB Dead - Green
-	pDeadColorBlue = 		register_cvar("amx_hmdeadbcolor", "0"); // RGB Dead - Blue
-	pXPosition = 			register_cvar("amx_hmxpos", "-1.0"); // x pos
-	pYPosition = 			register_cvar("amx_hmypos", "-1.0"); // y pos
-	pHoldTime = 			register_cvar("amx_hmholdtime", "0.5"); // hud hold time
+	pDeadHitMarker =		register_cvar("amx_hmdead", "1"); // Sets a different color when victim died.
+	pDeadColorRed =			register_cvar("amx_hmdeadrcolor", "255"); // RGB Dead - Red
+	pDeadColorGreen =		register_cvar("amx_hmdeadgcolor", "0"); // RGB Dead - Green
+	pDeadColorBlue =		register_cvar("amx_hmdeadbcolor", "0"); // RGB Dead - Blue
+	pXPosition =			register_cvar("amx_hmxpos", "-1.0"); // x pos
+	pYPosition =			register_cvar("amx_hmypos", "-1.0"); // y pos
+	pHoldTime =				register_cvar("amx_hmholdtime", "0.5"); // hud hold time
 }
 
 public plugin_precache()
