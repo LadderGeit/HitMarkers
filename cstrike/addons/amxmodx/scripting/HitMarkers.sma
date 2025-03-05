@@ -46,50 +46,43 @@ new const szSymbols[][] =
 	"x"
 };
 
-new const szVersion[] = "1.7";
-new const szSound[] = "hitmarkers/hitmarkers.wav";
+new const gPluginVersion[] = "1.8";
+new const gSound[] = "hitmarkers/hitmarkers.wav";
 
 new gWeaponList = (1 << CSW_SCOUT) | (1 << CSW_AWP) | (1 << CSW_SG550) | (1 << CSW_G3SG1);
 
 public plugin_init()
 {
-	register_plugin("COD: HitMarkers", szVersion, "LadderGoat");
+	register_plugin("COD: HitMarkers", gPluginVersion, "LadderGoat");
 
 	RegisterHam(Ham_TakeDamage, "player", "PostTakeDamage", 1);
 
-	pPlugin = register_cvar("amx_hitmarkers", "1"); // Enables/disables plugin
-	pRainbow = register_cvar("amx_hmrainbow", "1"); // Enables/disables random colors on every hit.
-	pRandomHitmarkers = register_cvar("amx_hmrandom", "1"); //Enables/disables random hit markers.
-	pSnipersOnly = register_cvar("amx_hmsnipers", "0"); // Enables/disables hitmarkers on snipers only.
-	pSounds = register_cvar("amx_hmsounds", "1"); // Enables/disables hitmarker sound on hit.
-	pSymbol = register_cvar("amx_hmsymbol", "x"); // Sets the symbol of the hitmarker (only works when amx_hmrandom "0")
-	pColorRed = register_cvar("amx_hmrcolor", "165"); // RGB - Red (This won't work when amx_hmrainbow = 1)
-	pColorGreen = register_cvar("amx_hmgcolor", "165"); // RGB - Green (This won't work when amx_hmrainbow = 1)
-	pColorBlue = register_cvar("amx_hmbcolor", "165"); // RGB - Blue (This won't work when amx_hmrainbow = 1)
-	pDeadHitMarker = register_cvar("amx_hmdead", "1"); // Sets a different color when victim died.
-	pDeadColorRed = register_cvar("amx_hmdeadrcolor", "255"); // RGB Dead - Red
-	pDeadColorGreen = register_cvar("amx_hmdeadgcolor", "0"); // RGB Dead - Green
-	pDeadColorBlue = register_cvar("amx_hmdeadbcolor", "0"); // RGB Dead - Blue
-	pXPosition = register_cvar("amx_hmxpos", "-1.0"); // x pos
-	pYPosition = register_cvar("amx_hmypos", "-1.0"); // y pos
-	pHoldTime = register_cvar("amx_hmholdtime", "0.5"); // hud hold time
+	pPlugin = register_cvar("hm_hitmarkers", "1"); 			// Set to 0 to disable hitmarkers
+	pRainbow = register_cvar("hm_rainbow", "0"); 			// Set to 1 to enable rainbow hitmarkers
+	pRandomHitmarkers = register_cvar("hm_random", "0"); 	// Set to 1 to enable random hitmarkers
+	pSnipersOnly = register_cvar("hm_snipers", "0"); 		// Set to 1 to enable hitmarkers only for snipers
+	pSounds = register_cvar("hm_sounds", "0"); 				// Set to 1 to enable hitmarker sounds
+	pSymbol = register_cvar("hm_symbol", "x"); 				// Hitmarker symbol (Requires hm_random "0")
+	pColorRed = register_cvar("hm_red", "165"); 			// RGB - Red (Requires hm_rainbow "0")
+	pColorGreen = register_cvar("hm_green", "165"); 		// RGB - Green (Requires hm_rainbow "0")
+	pColorBlue = register_cvar("hm_blue", "165"); 			// RGB - Blue (Requires hm_rainbow "0")
+	pDeadHitMarker = register_cvar("hm_dead", "1"); 		// Sets a different color when victim died.
+	pDeadColorRed = register_cvar("hm_dead_red", "255"); 	// RGB Dead - Red (Requires hm_dead "1")
+	pDeadColorGreen = register_cvar("hm_dead_green", "0"); 	// RGB Dead - Green (Requires hm_dead "1")
+	pDeadColorBlue = register_cvar("hm_dead_blue", "0"); 	// RGB Dead - Blue (Requires hm_dead "1")
+	pXPosition = register_cvar("hm_x", "-1.0"); 			// x pos
+	pYPosition = register_cvar("hm_y", "-1.0"); 			// y pos
+	pHoldTime = register_cvar("hm_holdtime", "0.5"); 		// Hud hold time
 }
 
 public plugin_precache()
 {
-	precache_sound(szSound);
+	precache_sound(gSound);
 }
 
-#if AMXX_VERSION_NUM < 190
-public client_disconnect(id)
-#else
 public client_disconnected(id)
-#endif
 {
-	if(task_exists(id + TASKID))
-	{
-		remove_task(id + TASKID);
-	}
+	remove_task(id + TASKID);
 }
 
 public PostTakeDamage(iVictim, iInflictor, iAttacker, Float:iDamage, iDamagebits)
@@ -156,5 +149,5 @@ public PostTakeDamage(iVictim, iInflictor, iAttacker, Float:iDamage, iDamagebits
 public PlaySound(iAttacker)
 {
 	iAttacker -= TASKID;
-	client_cmd(iAttacker, "spk %s", szSound);
+	client_cmd(iAttacker, "spk %s", gSound);
 }
